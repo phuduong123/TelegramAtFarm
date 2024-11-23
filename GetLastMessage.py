@@ -62,6 +62,7 @@ class TelegramBot:
         await self.client.disconnect()
 
 
+
 @app.get("/api/{phone_number}/tokenSession")
 async def get_last_message(phone_number: str):
     session_file = os.path.join(SESSIONS_DIR, f"{phone_number}.session")
