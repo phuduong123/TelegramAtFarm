@@ -1,4 +1,7 @@
 ###
-GET http://127.0.0.1:8000/api/84354739448/tokenSession
+GET http://127.0.0.1:8000/api/15706089598/tokenSession
 Content-Type: application/json
 
+###
+GET http://127.0.0.1:8000/api/phonenumber?phone_number=15706089598
+Content-Type: application/json

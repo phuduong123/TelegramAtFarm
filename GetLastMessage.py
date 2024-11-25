@@ -5,6 +5,7 @@ import re
 from telethon import TelegramClient
 from telethon.errors import SessionPasswordNeededError, AuthKeyUnregisteredError
 from sqlite3 import OperationalError
+import time
 
 # Hardcoded API constants
 API_ID = 27477637
@@ -62,12 +63,15 @@ class TelegramBot:
         await self.client.disconnect()
 
 
-
 @app.get("/api/{phone_number}/tokenSession")
 async def get_last_message(phone_number: str):
     session_file = os.path.join(SESSIONS_DIR, f"{phone_number}.session")
     if not os.path.exists(session_file):
         raise HTTPException(status_code=400, detail="Session file does not exist. Please provide a valid phone number.")
+
+    # Calculate session file age
+    session_age = time.time() - os.path.getmtime(session_file)
+    print(f"Session file age: {session_age:.2f} seconds")
 
     bot = TelegramBot(phone_number)
 
